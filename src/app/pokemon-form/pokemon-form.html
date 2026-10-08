@@ -1,0 +1,33 @@
+<form [formGroup]="pokemonForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="name">Name</label>
+    <input id="name" type="text" formControlName="name" />
+  </div>
+
+  <div>
+    <label for="type">Type</label>
+    <input id="type" type="text" formControlName="type" />
+  </div>
+
+  <div>
+    <label for="level">Level</label>
+    <input id="level" type="number" min="1" formControlName="level" />
+  </div>
+
+  <div>
+    <label for="nature">Nature</label>
+    <input id="nature" type="text" formControlName="nature" />
+  </div>
+
+  <button type="submit" [disabled]="pokemonForm.invalid">Save Pokemon</button>
+</form>
+
+<h2>Saved Pokemon</h2>
+
+<ul>
+  @for (p of pokemonService.pokemonList(); track p._id) {
+    <li>{{ p.name }} | Type: {{ p.type }} | Lv. {{ p.level }} | Nature: {{ p.nature }}</li>
+  } @empty {
+    <li>No Pokemon saved yet.</li>
+  }
+</ul>
